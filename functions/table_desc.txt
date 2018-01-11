@@ -1,0 +1,16 @@
+1,number of the image,imageNumber
+3,numerosity of left array,num_L
+4,ratio,ratio
+5,convex hull of left array,cov_L
+6,density of left array,den_L
+7,surface of left array,suf_L
+8,diameter of left array,dia_L
+9,contour length of left array,cot_L
+11,numerosity of right array,num_R
+12,convex hull of right array,cov_R
+13,density of right array,den_R
+14,surface of right array,suf_R
+15,diameter of right array,dia_R
+16,contour length of right array,cot_R
+17,correct response; 1 = left: 2 = right,correctResp
+18,congruency; 1 = congruent: 2 = incongruent,congruency
