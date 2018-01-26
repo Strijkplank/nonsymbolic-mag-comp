@@ -1,5 +1,7 @@
 # Installation instructions 
 
+Before you install the task script please ensure that PsychToolBox is installed. The PsychToolBox installation instructions are available on the [PsychToolBox website](http://psychtoolbox.org). However, I have also written an easy installation script available at [http://git.colling.net.nz/ptb/](http://git.colling.net.nz/ptb/).
+
 Make sure you're connected to the internet
 
 In `MATLAB` select the folder where you want to store your script e.g.
