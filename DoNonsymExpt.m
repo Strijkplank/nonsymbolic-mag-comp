@@ -212,16 +212,16 @@ try
     
     % Check the keyboard
     
-    WaitSecs(.5);
-    clc
-    disp('Checking keyboard.....PRESS A KEY TO CONTINUE')
-    [~, keyCode, ~] = KbWait(DEVICE,[],GetSecs() + 5);
+    %WaitSecs(.5);
+    %clc
+    %disp('Checking keyboard.....PRESS A KEY TO CONTINUE')
+    %[~, keyCode, ~] = KbWait(DEVICE,[],GetSecs() + 5);
     
-    if any(keyCode) == false
-        warning('Either the keyboard isn''t working or you didn''t press a key!');
-        warning('I''ll run the keyboard setup again')
-        DoKeyboardSetup
-    end
+    %if any(keyCode) == false
+    %    warning('Either the keyboard isn''t working or you didn''t press a key!');
+    %    warning('I''ll run the keyboard setup again')
+    %    DoKeyboardSetup
+    %end
     
     % Entering participant information
     
@@ -357,11 +357,13 @@ try
     
 catch ME
     sca
+    ShowCursor;
+    ListenChar;
     disp(ME.stack)
-    error(ME.message)
     SaveWS
     errorData.subjInfo = subjdata;
     errorData.rawInfo = ws;
+    
     
     if exist('error','dir')==0
         mkdir('error')
