@@ -26,7 +26,7 @@ try
     CURRENT_FOLDER = cd;
     commandwindow;
     HideCursor
-    ListenChar(2)
+   
     
     
     
