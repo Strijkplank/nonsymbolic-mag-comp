@@ -23,7 +23,9 @@ function [thisRT, thisKey] =  DoTrial(params,d,FIXATION_DURATION,DEVICE,QUIT_RES
     KbQueueFlush(DEVICE); % flush the queue
     KbQueueStart(DEVICE); % start the queue
     
-    [stimOnset] = Screen('Flip', d.window); % flip the stimulus
+    Screen('Flip', d.window); % flip the stimulus
+    
+    stimOnset = GetSecs; % Measure time after flip
     
     pressed = 0;
     
