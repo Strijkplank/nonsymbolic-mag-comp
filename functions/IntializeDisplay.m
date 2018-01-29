@@ -4,6 +4,7 @@ if nargin == 0
     skipSyncTests = 0;
 end
 try
+    Screen('Preference', 'ConserveVRAM',4096);Screen('Preference','SyncTestSettings',0.001,50);
     Screen('Preference','SkipSyncTests',skipSyncTests)
     
     
