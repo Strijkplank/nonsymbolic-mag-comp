@@ -310,11 +310,24 @@ try
     trialStruct.Properties.VariableDescriptions{'RT'} = 'the response time in seconds';
     
     
+    missedTrials = 0;
+    
     for t = 1: N_TRIALS
         
         [thisRT, thisKey] =  DoTrial(params,d,FIXATION_DURATION,...
             DEVICE,QUIT_RESP,ISI,trialStruct,t,responseKeyList,...
             ALLOW_QUIT,LEFT_RESP,RIGHT_RESP);
+        
+        
+        if strcmp(thisKey,'nr')
+            missedTrials = missedTrials + 1;
+        else 
+            missedTrials = 0;
+        end
+        
+        if missedTrials > 5
+           error('Too many mised trials')
+        end
         
         trialStruct.trial(t) =  t;
         trialStruct.key{t} = thisKey;

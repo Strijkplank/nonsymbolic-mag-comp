@@ -46,6 +46,8 @@ function [thisRT, thisKey] =  DoTrial(params,d,FIXATION_DURATION,DEVICE,QUIT_RES
             thisKey = 'left';
         case RIGHT_RESP
             thisKey = 'right';
+        otherwise 
+            thisKey = 'nr';
     end
     
     Screen('FillRect', d.window, d.black);
