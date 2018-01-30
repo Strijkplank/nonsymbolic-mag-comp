@@ -57,13 +57,13 @@ try
     
     % instructions etc
     
-    MAIN_INSTRUCTIONS = 'Press the left key (z) or the right key (/) to indicate which side has more dots.';
+    MAIN_INSTRUCTIONS = 'Press the left key (z) or the right key (m) to indicate which side has more dots.';
     PRAC_INSTRUCTIONS = 'Practice Trials';
     EXPT_INSTRUCTIONS = 'Experimental Trials';
     
     % response keys
     LEFT_RESP = 'z';
-    RIGHT_RESP = '/?';
+    RIGHT_RESP = 'm';
     SPACE_RESP = 'SPACE';
     QUIT_RESP = 'q';
     
@@ -237,8 +237,8 @@ try
     
     
     
-    fontSize = 50  ;
-    textWrap = 60      ; % replace with a function that gets the optimal wrapping based on a font size
+    fontSize = 30  ;
+    textWrap = 50      ; % replace with a function that gets the optimal wrapping based on a font size
     vSpacing = 1.5  ;
     
     Screen('TextSize',d.window,fontSize);
