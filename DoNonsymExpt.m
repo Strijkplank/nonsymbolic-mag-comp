@@ -7,17 +7,19 @@ thisDateString = datestr(now(),'DDMMYYhhmmss');
 try
     
     %General questions to ask before hand
-    fprintf('First some demographic questions.\n\n\n');
+       fprintf('First some demographic questions.\n\n\n');
     
-    subjdata.code = input('What is the participant code? ','s');
+    subjdata.code = input('What is the participant number?');
     
-    subjdata.age = input('What is the participant age? ','s');
+    subjdata.age = input('What is the participant age?');
     
     subjdata.gender = input('What is the participant gender? ','s');
     
-    subjdata.grade = input('What is the participant grade? ','s'); % grade
     
-    subjdata.school = input('What is the participant school? ','s');% school
+    subjdata.grade = input('What is the participant grade? '); % grade
+    
+        
+    subjdata.school = input('What is the participant code? ','s');% school
     
     subjdata.runtime = datestr(now,0);
     
@@ -42,7 +44,7 @@ try
     
     % task type and trial number
     
-    TASK_TYPE = 'full'; % the other option is 'partial'
+    TASK_TYPE = 'full'; % the other option is 'partial' # should be 100 full and 100 partial
     N_TRIALS = 200;
     PRAC_TRIALS = 40;
     CURRENT_FOLDER = cd;
@@ -57,7 +59,7 @@ try
     
     % instructions etc
     
-    MAIN_INSTRUCTIONS = 'Press the left key (z) or the right key (m) to indicate which side has more dots.';
+    MAIN_INSTRUCTIONS = 'Il tuo compito e'' di indicare in quale parte dello schermo appaiono piu'' pallini: se l''insieme piu'' numeroso e'' a sinistra premi il tasto (Z), se invece e'' a destra, premi il tasto (M). Cerca di rispondere il piu'' velocemente e accuratamente possibile.';
     PRAC_INSTRUCTIONS = 'Practice Trials';
     EXPT_INSTRUCTIONS = 'Experimental Trials';
     
