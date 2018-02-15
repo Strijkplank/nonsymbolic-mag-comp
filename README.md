@@ -8,13 +8,28 @@ In `MATLAB` select the folder where you want to store your script e.g.
 `c:\USER\Documents\MATLAB\scripts` on `WINDOWS` or
 `/Users/USER/Documents/Matlab/scripts` on `MAC OS` or `LINUX`
 
-At the matlab prompt type
-> `unzip('https://github.com/ljcolling/nonsymbolic-mag-comp/archive/master.zip')`
+There are now two versions of the task. The commands you type will be different depending on the version you want (you can also get both versions if you want).
 
-This will download the files to a new folder called `nonsymbolic-mag-comp-master` inside your scripts folder.
+## Long version
+
+At the matlab prompt type
+> `unzip('https://github.com/ljcolling/nonsymbolic-mag-comp/archive/Long-version.zip')`
+
+This will download the files to a new folder called `nonsymbolic-mag-comp-Long-version` inside your scripts folder.
 
 Navigate to this folder with the command
-> `cd nonsymbolic-mag-comp-master`
+> `cd nonsymbolic-mag-comp-Long-version`
+
+## Short version
+
+At the matlab prompt type
+> `unzip('https://github.com/ljcolling/nonsymbolic-mag-comp/archive/Short-version.zip')`
+
+This will download the files to a new folder called `nonsymbolic-mag-comp-Short-version` inside your scripts folder.
+
+Navigate to this folder with the command
+> `cd nonsymbolic-mag-comp-Short-version`
+
 
 ## Setup instructions
 
