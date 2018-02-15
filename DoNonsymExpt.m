@@ -1,4 +1,4 @@
-function DoNonsymExpt()
+%function DoNonsymExpt()
 
 SKIP_SYNC = 0
 ALLOW_QUIT = true;
@@ -23,9 +23,9 @@ try
     
     subjdata.runtime = datestr(now,0);
     
-    TASK_TYPE = 'full'; % the other option is 'partial'
-    
-    CURRENT_FOLDER = cd;
+    TASK_TYPE = 'full'; % the other option is 'partial' # should be 100 full and 100 partial
+
+     CURRENT_FOLDER = cd;
     commandwindow;
     HideCursor
    
@@ -44,11 +44,11 @@ try
     
     % task type and trial number
     
-    TASK_TYPE = 'full'; % the other option is 'partial' # should be 100 full and 100 partial
-    N_TRIALS = 200;
-    PRAC_TRIALS = 40;
-    CURRENT_FOLDER = cd;
-    N_BLOCKS = 5;
+    
+    N_TRIALS = 160;
+    PRAC_TRIALS = 20;
+
+    N_BLOCKS = 4;
     
     BLOCK_BREAKS = (1:N_TRIALS/N_BLOCKS:N_TRIALS) - 1;
     BLOCK_BREAKS = BLOCK_BREAKS(BLOCK_BREAKS > 0);
@@ -102,41 +102,39 @@ try
     
     
     imageDir = [CURRENT_FOLDER filesep 'functions' filesep 'images' filesep TASK_TYPE '400N'];
-    imageFiles = arrayfun(@(n) [imageDir filesep num2str(n) '.bmp'],1:N_TRIALS,'UniformOutput',false);
-    
-    switch TASK_TYPE
-        case 'full'
-            imageInfo = load([CURRENT_FOLDER filesep 'functions' filesep 'FullConditions.mat'],'-ASCII');
-            imageInfo = imageInfo(1:200,:);
-            
-            
-        case 'partial'
-            imageInfo = load([CURRENT_FOLDER filesep 'functions' filesep 'PartialConditions.mat'],'-ASCII');
-            imageInfo = imageInfo(1:200,:);
-    end
+    %imageFiles = arrayfun(@(n) [imageDir filesep num2str(n) '.bmp'],1:N_TRIALS,'UniformOutput',false);
     
     % Preload the shuffling %
     
-    % This is ridiculous ineffecient. I should fix it.
-    trialTypes = unique(arrayfun(@(x,y) [num2str(x) '_' num2str(y)],imageInfo(:,3), imageInfo(:,11),'UniformOutput',false));
-    trialTypes = [trialTypes; trialTypes];
-    trialTokens = arrayfun(@(x,y) [num2str(x) '_' num2str(y)],imageInfo(:,3), imageInfo(:,11),'UniformOutput',false);
-    trialNumbers = 1: N_TRIALS;
-    shuffled = [];
-    while length(trialTokens) > 0
+    imageInfoF = load([CURRENT_FOLDER filesep 'functions' filesep 'FullConditions.mat'],'-ASCII');
+    imageInfoF = imageInfoF(1:200,:);        
+    trialTokens = arrayfun(@(x,y,z) [num2str(x) '_' num2str(y) '_' num2str(z)], imageInfoF(:,3),imageInfoF(:,11),imageInfoF(:,18),'UniformOutput',false);
+    trialTypes = unique(trialTokens);
+    fullBlocks = cellfun(@(x) Shuffle(find(ismember(trialTokens,x))),trialTypes,'UniformOutput',false);
+    
+    
+    
         
-        for type = 1 : length(trialTypes)
-            
-            thisType = trialTypes(type);
-            tokenValues = find(ismember(trialTokens,thisType));
-            tokenValues = tokenValues(randperm(length(tokenValues),length(tokenValues)));
-            thisValue = tokenValues(1);
-            shuffled = [shuffled; trialNumbers(thisValue)];
-            trialTokens(thisValue) = [];
-            trialNumbers(thisValue) = [];
-        end
-    end
+    imageInfoP = load([CURRENT_FOLDER filesep 'functions' filesep 'PartialConditions.mat'],'-ASCII');
+    imageInfoP = imageInfoP(1:200,:);        
+    trialTokens = arrayfun(@(x,y,z) [num2str(x) '_' num2str(y) '_' num2str(z)], imageInfoP(:,3),imageInfoP(:,11),imageInfoP(:,18),'UniformOutput',false);
+    trialTypes = unique(trialTokens);
+    partialBlocks = cellfun(@(x) Shuffle(find(ismember(trialTokens,x))),trialTypes,'UniformOutput',false);
+    
+    
+    
+    fb1 =  cell2mat(horzcat(arrayfun(@(i) fullBlocks{i}(1),1:length(fullBlocks),'UniformOutput',false)'));
+    fb2 =  cell2mat(horzcat(arrayfun(@(i) fullBlocks{i}(2),1:length(fullBlocks),'UniformOutput',false)'));
+    pb1 = cell2mat(horzcat(arrayfun(@(i) partialBlocks{i}(1),1:length(fullBlocks),'UniformOutput',false)'));
+    pb2 = cell2mat(horzcat(arrayfun(@(i) partialBlocks{i}(2),1:length(fullBlocks),'UniformOutput',false)'));
+    
+   
+    blockCodes = Shuffle({'fb1','fb2','pb1','pb2'});
+    
+    
+    AllTrials = [];
     % -- %
+   for bb = 1 : N_BLOCKS 
     trialStruct = {};
     
     TABLE_DESC_FILE = 'table_desc.txt';
@@ -145,27 +143,45 @@ try
     tableDesc.Properties.VariableNames([1:3]) = {'col','desc','label'};
     
     
-    for i = 1 : N_TRIALS
-        origImg = imread(imageFiles{i});
-        
-        [p, n, e] = fileparts(imageFiles{i});
+    thisBlock = eval(blockCodes{bb});
+    
+    switch blockCodes{bb}
+        case 'fb1'
+            imageInfo = imageInfoF;
+            TASK_TYPE = 'full';
+        case 'fb2'
+            imageInfo = imageInfoF;
+            TASK_TYPE = 'full'
+        case 'pb1'
+            imageInfo = imageInfoP;
+            TASK_TYPE = 'partial'
+        case 'pb2'
+            imageInfo = imageInfoP;
+            TASK_TYPE = 'partial'
+    end
+    
+    for ii = 1:length(thisBlock)
+        i = thisBlock(ii);
+        %origImg = imread(imageFiles{i});
+        origImg =[];
+        %[p, n, e] = fileparts(imageFiles{i});
         % -- Resize the images -- %
-        newImg = imresize(origImg, params.scaleFactor);
-        
+        %newImg = imresize(origImg, params.scaleFactor);
+        newImg = [];
         
         % -- Put them in the trialStruct -- %
         
-        trialStruct(i).TASK_TYPE = TASK_TYPE;
+        trialStruct(ii).TASK_TYPE = TASK_TYPE;
         
-        trialStruct(i).origImg = origImg;
-        trialStruct(i).stimulus = newImg;
+        trialStruct(ii).origImg = origImg;
+        trialStruct(ii).stimulus = newImg;
         
-        trialStruct(i).fileName = [n e];
-        trialStruct(i).fullPath = p;
+        trialStruct(ii).fileName = [];%[n e];
+        trialStruct(ii).fullPath = [];%p;
         
         
         for t = 1 : height(tableDesc)
-            trialStruct(i).(tableDesc.label{t}) = imageInfo(i,tableDesc.col(t));
+            trialStruct(ii).(tableDesc.label{t}) = imageInfo(i,tableDesc.col(t));
         end
         
     end
@@ -174,11 +190,25 @@ try
     
     % -- Randomise and build trial structure -- %
     
-    
-    
     trialStruct = struct2table(trialStruct);
-    trialStruct = trialStruct(shuffled,:);
-    trialStruct.trialNumber = [1:N_TRIALS]'; % the the trial number
+    AllTrials = vertcat(AllTrials,trialStruct);
+    
+    end
+    
+    AllTrials.fullPath = cellfun(@(x,y) [CURRENT_FOLDER filesep 'functions' filesep 'images' filesep x '400N' filesep y '.bmp'],...
+        AllTrials.TASK_TYPE,arrayfun(@(x) num2str(x),AllTrials.imageNumber,'UniformOutput',false),...
+        'UniformOutput',false);
+    
+    AllTrials.fileName = AllTrials.fullPath;
+    
+    for i = 1 : height(AllTrials)
+        origImg = imread(AllTrials.fullPath{i});
+        newImg =  imresize(origImg, params.scaleFactor);
+        AllTrials.origImg{i} =  origImg;
+        AllTrials.stimulus{i} = newImg;
+    end
+
+    trialStruct = AllTrials;
     
     % -- Now add the descriptions -- %
     
@@ -200,6 +230,21 @@ try
     
     % -- -- %
     
+    
+    trialTokens  = arrayfun(@(x,y,z,q) strcat(num2str(x,'%.1f'), '_', num2str(y), '_', num2str(z), '_', q), trialStruct.ratio, trialStruct.congruency, trialStruct.correctResp, trialStruct.TASK_TYPE,'UniformOutput',false);
+    trialTokens = cellfun(@(x) x,trialTokens);
+    trialTypes = unique(trialTokens);
+    
+    orders = arrayfun(@(x) find(ismember(trialTokens,trialTypes{x}))',1:length(trialTypes),'UniformOutput',false)';
+    orders = cell2mat(orders);
+    
+    for i = 1 : N_BLOCKS
+        orders(:,i) = Shuffle(orders(:,i));
+    end
+    
+    orders = reshape(orders,N_TRIALS,1);
+    
+    trialStruct = trialStruct(orders,:);
     
     % -- Now add the 40 practise trials
     

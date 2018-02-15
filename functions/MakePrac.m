@@ -17,8 +17,8 @@ switch TASK_TYPE
 end
 
 imageInfoPrac = imageInfo(201:end,:);
-uniquePairs = unique(arrayfun(@(x,y) [num2str(x) '_' num2str(y)],imageInfoPrac(:,3), imageInfoPrac(:,11),'UniformOutput',false));
-allPairs = arrayfun(@(x,y) [num2str(x) '_' num2str(y)],imageInfoPrac(:,3), imageInfoPrac(:,11),'UniformOutput',false);
+uniquePairs = unique(arrayfun(@(x,y,z) [num2str(x,'%.1f') '_' num2str(y) '_' num2str(z)],imageInfoPrac(:,4), imageInfoPrac(:,17),imageInfoPrac(:,18),'UniformOutput',false));
+allPairs = arrayfun(@(x,y,z) [num2str(x,'%.1f') '_' num2str(y) '_' num2str(z)],imageInfoPrac(:,4), imageInfoPrac(:,17),imageInfoPrac(:,18),'UniformOutput',false);
 
 PRAC_TRIALS = cellfun(@(x) [min(imageInfoPrac(ismember(allPairs,x),1)) max(imageInfoPrac(ismember(allPairs,x),1))],uniquePairs,'UniformOutput',false);
 PRAC_TRIALS = horzcat(PRAC_TRIALS{:});
@@ -33,7 +33,7 @@ imageFiles = arrayfun(@(n) [imageDir filesep num2str(n) '.bmp'],PRAC_TRIALS,'Uni
 tableDesc = readtable([cd filesep 'functions' filesep TABLE_DESC_FILE]);
 tableDesc.Properties.VariableNames([1:3]) = {'col','desc','label'};
 
-
+trialStruct = struct();
 for i = 1 : N_TRIALS
     origImg = imread(imageFiles{i});
     
