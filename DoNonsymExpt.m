@@ -1,4 +1,6 @@
-%function DoNonsymExpt()
+function DoNonsymExpt()
+
+% SHORT VERSION
 
 SKIP_SYNC = 0
 ALLOW_QUIT = true;
@@ -9,14 +11,14 @@ try
     %General questions to ask before hand
        fprintf('First some demographic questions.\n\n\n');
     
-    subjdata.code = input('What is the participant number?');
+    subjdata.code = input('What is the participant number? ','s');
     
-    subjdata.age = input('What is the participant age?');
+    subjdata.age = input('What is the participant age? ','s');
     
     subjdata.gender = input('What is the participant gender? ','s');
     
     
-    subjdata.grade = input('What is the participant grade? '); % grade
+    subjdata.grade = input('What is the participant grade? ','s'); % grade
     
         
     subjdata.school = input('What is the participant code? ','s');% school
