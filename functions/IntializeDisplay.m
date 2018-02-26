@@ -23,7 +23,7 @@ try
     
     
     [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black)
-    
+    ShowHideWinTaskbarMex
     [screenXpixels, screenYpixels] = Screen('WindowSize', window);
     [xCenter, yCenter] = RectCenter(windowRect);
     
