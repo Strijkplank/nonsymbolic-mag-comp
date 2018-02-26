@@ -1,20 +1,20 @@
 function PressToGo(device,keyList)
 
 if nargin == 2
-    KbQueueCreate(device,keyList);
+    KbQueueCreate([],keyList);
 else
-    KbQueueCreate(device);
+    KbQueueCreate([]);
 end
-KbQueueStart(device)
+KbQueueStart([])
 pressed = 0;
 
 while pressed == 0
-    [ pressed, ~] = KbQueueCheck(device);
+    [ pressed, ~] = KbQueueCheck([]);
 end
 
-KbQueueFlush(device);
-KbQueueRelease(device);
-KbQueueStop(device);
+KbQueueFlush([]);
+KbQueueRelease([]);
+KbQueueStop([]);
 
 
 

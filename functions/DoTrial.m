@@ -20,8 +20,8 @@ function [thisRT, thisKey] =  DoTrial(params,d,FIXATION_DURATION,DEVICE,QUIT_RES
   
     
     
-    KbQueueFlush(DEVICE); % flush the queue
-    KbQueueStart(DEVICE); % start the queue
+    KbQueueFlush([]); % flush the queue
+    KbQueueStart([]); % start the queue
     
     Screen('Flip', d.window); % flip the stimulus
     
@@ -30,7 +30,7 @@ function [thisRT, thisKey] =  DoTrial(params,d,FIXATION_DURATION,DEVICE,QUIT_RES
     pressed = 0;
     
     while pressed == 0
-        [ pressed, firstPress] = KbQueueCheck(DEVICE); %  check if any key was pressed.
+        [ pressed, firstPress] = KbQueueCheck([]); %  check if any key was pressed.
     end
     
     validResponses = firstPress(responseKeyList == 1);

@@ -313,7 +313,7 @@ try
     spaceKeyList(KbName('SPACE')) = 1;
     PressToGo(DEVICE,spaceKeyList)
     
-    KbQueueCreate(DEVICE,responseKeyList)
+    KbQueueCreate([],responseKeyList)
     
     pracStruct.key = repmat({0},height(pracStruct),1);
     pracStruct.trial = zeros(height(pracStruct),1);
@@ -334,8 +334,8 @@ try
         pracStruct.RT(t) = thisRT;
     end
     
-    KbQueueRelease(DEVICE);
-    KbQueueStop(DEVICE);
+    KbQueueRelease([]);
+    KbQueueStop([]);
     
     %% --- EXPT TRIALS
     
@@ -347,7 +347,7 @@ try
     spaceKeyList(KbName('SPACE')) = 1;
     PressToGo(DEVICE,spaceKeyList)
     
-    KbQueueCreate(DEVICE,responseKeyList)
+    KbQueueCreate([],responseKeyList)
     
     
     trialStruct.key = repmat({0},height(trialStruct),1);
@@ -384,14 +384,14 @@ try
         
         if any(t == BLOCK_BREAKS) == 1
             % Reached the end of a block
-            KbQueueRelease(DEVICE);
-            KbQueueStop(DEVICE);
+            KbQueueRelease([]);
+            KbQueueStop([]);
             DrawFormattedText(d.window,  ['END OF BLOCK' num2str(find(t == BLOCK_BREAKS))], 'center', 'center', d.white, textWrap,[],[],vSpacing);
             Screen('Flip', d.window);
             spaceKeyList = zeros(1,256);
             spaceKeyList(KbName('SPACE')) = 1;
             PressToGo(DEVICE,spaceKeyList)
-            KbQueueCreate(DEVICE,responseKeyList)
+            KbQueueCreate([],responseKeyList)
             
         end
         
