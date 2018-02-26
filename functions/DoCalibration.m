@@ -165,6 +165,8 @@ try
     meanWidth = mean(widths);
     meanHeight = mean(heights);
     
+   
+    
     disp(['The box height was ' num2str(meanWidth) ' pixels (range: ' num2str(min(widths)) '-' num2str(max(widths)) ')'])
     disp(['The box height was ' num2str(meanHeight) ' pixels (range: ' num2str(min(heights)) '-' num2str(max(heights)) ')'])
     
@@ -209,7 +211,7 @@ scaleFactor = mean([widthScaleFactor heightScaleFactor]);
 
 % -- now save out the params -- %
 params.scaleFactor = scaleFactor;
-params.ToUse = device;
+params.ToUse = 'device';
 
 SaveWS;
 params.rawInfo = ws;
