@@ -4,9 +4,12 @@ if nargin == 0
     skipSyncTests = 0;
 end
 try
-    Screen('Preference', 'ConserveVRAM',4096);Screen('Preference','SyncTestSettings',0.001,50);
+    Screen('Preference', 'ConserveVRAM',4096);Screen('Preference','SyncTestSettings',0.002,50);
     Screen('Preference','SkipSyncTests',skipSyncTests)
     
+    if IsWindows
+         Screen('Preference', 'VBLTimestampingMode', -1);
+    end
     
     % Get the screen numbers
     screens = Screen('Screens');
@@ -23,6 +26,7 @@ try
     
     [screenXpixels, screenYpixels] = Screen('WindowSize', window);
     [xCenter, yCenter] = RectCenter(windowRect);
+    
     
     
 

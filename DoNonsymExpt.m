@@ -28,8 +28,8 @@ try
     TASK_TYPE = 'full'; % the other option is 'partial' # should be 100 full and 100 partial
 
      CURRENT_FOLDER = cd;
-    commandwindow;
-    HideCursor
+
+     HideCursor
    
     
     
@@ -420,7 +420,7 @@ try
 catch ME
     sca
     ShowCursor;
-    ListenChar;
+   % ListenChar;
     disp(ME.stack)
     SaveWS
     errorData.subjInfo = subjdata;
