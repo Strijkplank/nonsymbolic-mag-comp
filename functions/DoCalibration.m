@@ -1,4 +1,4 @@
-function DoCalibration(device)
+function DoCalibration()
 try
     clc
     commandwindow; % give focus to the command window
@@ -82,7 +82,7 @@ try
         'center','center',[1 1 1], 80);
     
     Screen('Flip',window);
-    KbWait(device);
+    KbWait();
     
     
     % -- now do the actual calibration -- %
@@ -103,14 +103,14 @@ try
     
     sizeparams = {};
     
-    KbQueueCreate(device);
-    KbQueueStart(device);
+    KbQueueCreate();
+    KbQueueStart();
     
     while attempts < 2
         
         while  1
             
-            [pressed, firstPress] = KbQueueCheck(device);
+            [pressed, firstPress] = KbQueueCheck();
             
             firstPress(firstPress==0)=NaN; %little trick to get rid of 0s
             [endtime, keyCode]=min(firstPress); % gets the RT of the first key-press and its ID
@@ -209,7 +209,7 @@ scaleFactor = mean([widthScaleFactor heightScaleFactor]);
 
 % -- now save out the params -- %
 params.scaleFactor = scaleFactor;
-params.deviceToUse = device;
+params.ToUse = device;
 
 SaveWS;
 params.rawInfo = ws;
