@@ -9,17 +9,11 @@ try
     %General questions to ask before hand
        fprintf('First some demographic questions.\n\n\n');
     
-    subjdata.code = input('What is the participant number?');
+    subjdata.code = input('Wat is uw proefpersoon-nummer?');
     
-    subjdata.age = input('What is the participant age?');
+    subjdata.age = input('Wat is uw leeftijd?');
     
-    subjdata.gender = input('What is the participant gender? ','s');
-    
-    
-    subjdata.grade = input('What is the participant grade? '); % grade
-    
-        
-    subjdata.school = input('What is the participant code? ','s');% school
+    subjdata.gender = input('Wat is uw geslacht? Gelieve M voor Mannelijk, of V voor Vrouwelijk in te geven. ','s');
     
     subjdata.runtime = datestr(now,0);
     
@@ -59,13 +53,14 @@ try
     
     % instructions etc
     
-    MAIN_INSTRUCTIONS = 'Il tuo compito e'' di indicare in quale parte dello schermo appaiono piu'' pallini: se l''insieme piu'' numeroso e'' a sinistra premi il tasto (Z), se invece e'' a destra, premi il tasto (M). Cerca di rispondere il piu'' velocemente e accuratamente possibile.';
+    MAIN_INSTRUCTIONS = 'In deze taak zult u verschillende afbeeldingen zien'' In deze afbeeldingen zult u twee verschillende puntenwolken zien'' Het is de bedoeling dat u aangeeft in welke van de twee er MEER punten zijn.'' Indien er meer punten zijn in het linkse puntenwolk, dien je op de f toets te drukken.''Indien er meer punten zijn in het rechtse puntenwolk, dien je op de j toets te drukken''Probeer zo snel en accuraat mogelijk te antwoorden';
+
     PRAC_INSTRUCTIONS = 'Practice Trials';
     EXPT_INSTRUCTIONS = 'Experimental Trials';
     
     % response keys
-    LEFT_RESP = 'z';
-    RIGHT_RESP = 'm';
+    LEFT_RESP = 'f';
+    RIGHT_RESP = 'j';
     SPACE_RESP = 'SPACE';
     QUIT_RESP = 'q';
     
