@@ -15,6 +15,10 @@ try
     
     subjdata.gender = input('Wat is uw geslacht? Gelieve M voor Mannelijk, of V voor Vrouwelijk in te geven. ','s');
     
+    subjdata.code = 'Leuven'
+    
+    subjdata.grade = 'Adult'
+    
     subjdata.runtime = datestr(now,0);
     
     TASK_TYPE = 'full'; % the other option is 'partial'
