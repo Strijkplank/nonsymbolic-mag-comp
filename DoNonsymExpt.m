@@ -1,6 +1,6 @@
 function DoNonsymExpt()
 
-% SHORT VERSION
+% SHORT VERSIONs
 
 SKIP_SYNC = 0
 ALLOW_QUIT = true;
