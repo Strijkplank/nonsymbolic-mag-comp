@@ -57,7 +57,7 @@ try
     
     % instructions etc
     
-    MAIN_INSTRUCTIONS = 'In deze taak zult u verschillende afbeeldingen zien'' In deze afbeeldingen zult u twee verschillende puntenwolken zien'' Het is de bedoeling dat u aangeeft in welke van de twee er MEER punten zijn.'' Indien er meer punten zijn in het linkse puntenwolk, dien je op de f toets te drukken.''Indien er meer punten zijn in het rechtse puntenwolk, dien je op de j toets te drukken''Probeer zo snel en accuraat mogelijk te antwoorden';
+    MAIN_INSTRUCTIONS = 'In deze taak zult u verschillende afbeeldingen zien'' In deze afbeeldingen zult u twee verschillende puntenwolken zien'' Het is de bedoeling dat u aangeeft in welke van de twee er MEER punten zijn.'' Indien er meer punten zijn in het linkse puntenwolk, dien je op de f toets te drukken.''Indien er meer punten zijn in het rechtse puntenwolk, dien je op de j toets te drukken''Probeer zo snel en accuraat mogelijk te antwoorden''Druk op de spatiebalk om verder te gaan';
 
     PRAC_INSTRUCTIONS = 'Practice Trials';
     EXPT_INSTRUCTIONS = 'Experimental Trials';
@@ -338,7 +338,7 @@ try
             % Reached the end of a block
             KbQueueRelease(DEVICE);
             KbQueueStop(DEVICE);
-            DrawFormattedText(d.window,  ['END OF BLOCK' num2str(find(t == BLOCK_BREAKS))], 'center', 'center', d.white, textWrap,[],[],vSpacing);
+            DrawFormattedText(d.window,  ['Pauze, Druk op de spatiebalk om verder te gaan. Einde van blok' num2str(find(t == BLOCK_BREAKS))], 'center', 'center', d.white, textWrap,[],[],vSpacing);
             Screen('Flip', d.window);
             spaceKeyList = zeros(1,256);
             spaceKeyList(KbName('SPACE')) = 1;
